@@ -51,7 +51,7 @@ USB 深度相机
 .. _net-connection-label:
 
 Depth Camera over Ethernet
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Percipio depth cameras over Ethernet need to be powered by an external power supply, and some camera models also support POE power supply. By default, the depth camera uses DHCP to dynamically obtain an IP address from the server.
 

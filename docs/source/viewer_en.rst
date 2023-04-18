@@ -93,7 +93,7 @@ The message "Device IP setting failed" in the log display area indicates that th
 
 
 Selecting the Camera
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Starting from version 1.2.3 of Percipio Viewer, you need to manually select and open the camera after opening the software.
 
@@ -119,7 +119,7 @@ To select the camera, do the following (taking the camera with SN 207000106916 a
 
 
 Viewing Information
-~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Click on |info| allows you to view camera information, including interface name, SN, model, MAC/IP address, firmware version, and configuration version.
 
@@ -146,7 +146,7 @@ The firmware version information is quite lengthy, so you will need to hover you
 
 
 Setting Work Mode
-~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Percipio Viewer supports setting the work mode of the camera, and the camera captures images according to the settings.
 
@@ -183,7 +183,7 @@ The selected work mode will have an icon  **√**  displayed on its right side.
 
 
 Previewing Images
-~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Percipio Viewer supports previewing depth images, color images, left/right infrared images, point clouds, and adjusting component parameters.
 
@@ -296,7 +296,7 @@ Follow these steps to preview images:
 
 
 Saving Images
-~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Follow the steps below to save 2D/3D images:
 
@@ -354,7 +354,7 @@ To play back the recorded video, click on :guilabel:`Preferences`, then click on
 
 
 Image Processing (Software)
-----------------
+------------------------------
 
 This section mainly introduces the image processing functions supported by Percipio Viewer software:
 
@@ -366,7 +366,7 @@ This section mainly introduces the image processing functions supported by Perci
 
 
 Image Alignment
-~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Percipio Viewer supports RGB-Depth alignment and RGB-3D alignment.
 
@@ -470,13 +470,13 @@ when Depth Stream is in status |on|, select :guilabel:`Undistort EN` to  obtain 
 
 
 Image Processing (Camera)
-----------------
+---------------------------------
 
 This section mainly introduces how to set camera-specific image processinging functions through Percipio Viewer.
 
 
 The ToF Series
-~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following are the image processing functions unique to the ToF series. They can only be set in the interface if the camera is opened with Percipio Viewer.
 
@@ -586,74 +586,9 @@ The PS Series
 
 The following are the image processing functions unique to the PS801 series. They can only be set in the interface if the camera is opened with Percipio Viewer.
 
-* :ref:`SGBM Parameters <viewer:SGBM Parameters>`
+
 * :ref:`Flash Light <viewer:Flash Light>`
 * :ref:`HDR <viewer:HDR>`
-
-
-SGBM Parameters
-+++++++++++++++++
-The SGBM parameters are used to adjust the camera's measuring range, accuracy, frame rate, and used in post-processing of the depth image. Currently, only PS800-E1 supports the adjustment of these parameters.
-
-To adjust the SGBM parameters, expand the Control parameters of the Depth Stream when all data streams are in status |off| and no other functions are open.
-
-
-SGBM Parameters Related to Range, Accuracy, and Frame Rate
-
-scale unit: This parameter is used to set the unit of pixel values in the depth image. The maximum depth value is equal to 65536 * scale unit. The smaller the set value of this parameter, the higher the accuracy of the depth calculation. However, if the set value is too small, it may lead to errors in the depth calculation.
-
-disparity num: This parameter is used to set the range of the disparity search. The larger the set value of this parameter, the greater the measurement range in the camera's Z direction, but it also consumes more computational resouces.  It is recommended to set it to a multiple of 16.
-
-
-disparity offset: This parameter is used to set the starting value of the disparity search. The smaller the set value of this parameter, the larger the maximum measured value in Z-direction (Zmax), which means a greater measurement range in the camera's Z direction. The lower limit of the disparity offset is affected by depth of field.
-
-match window height: This parameter is used to set the height of the disparity matching window. The value must be odd.
-
-
-match window width: This parameter is used to set the width of the disparity matching window. The value must be odd. 
-
-
-The larger the matching window (match window height * match window width), the smoother the depth image, but the accuracy is also lower. The smaller the disparity matching window, the more details are displayed in the depth image, but the probability of mismatching is higher.
-
-image number: This parameter is used to set the number of IR images used for depth calculation. The larger the set value of this parameter, the better the image quality for the depth image, but the frame rate is also lower.
-
-Note: 
-Due to the limited computing power of the camera's emmbedded chip, there is a constraint between the number of images and the height of the match window. Specifically, (image number+1) / 2 * match window height < 48.
-
-
-SGBM Parameters Related to Smoothing of Edge Pixels in the Image
-
-Semi-global param p1: 
-This parameter is used to set the constraint penalty of the disparity change by +/-1 between neighboring pixels. The larger the set value of this parameter, the smoother the depth image. This parameter is set to prevent discontinuous or unreasonable depth values, and to effectively suppress noise and discontinuity.
-
-Semi-global param p1 scale: 
-This parameter is used to set the constraint penalty parameter of the disparity change for adjacent pixels (+/-1). The smaller the set value, the smoother the depth image.
-
-semi-global param p2: 
-This parameter is used to set the constraint penalty of disparity changes to be greater than 1 between neighboring pixels. The larger the set value of this parameter, the smoother the depth image. It is important to note that the algorithm requires P2>P1. This parameter is set to effectively handle texture-rich areas and reduce the number of mismatches.
-
-enable half window size: 
-This is the switch for searching filters. The search filters can further optimize the depth image, removes noise and discontinuity, and is more friendly to edge point clouds.
-
-
-SGBM Parameters Related to Mismatch
-
-uniqueness factor param
-This parameter is used to set the uniqueness check parameter 1, which is margin in percentage by which the best (minimum) computed cost function value should "win" the second best value to consider the found match correct. The larger the set value of this parameter, the more unique the matching cost, and the more mismatched points are filtered out.
-
-
-uniqueness min absolute diff
-This parameter is used to set the uniqueness check parameter 2, which is margin in difference by which the best (minimum) computed cost function value should "win" the second best value to consider the found match correct. The larger the set value of this parameter, the more unique the matching cost, and the more mismatched points are filtered out.
-
-enable LRC 
-This is the switch for left-right consistency check (LRC). After enabling "enable LRC", adjust the parameter "max LRC diff". 
-During stereo matching, for the pixels on the same object surface, use LR to denote the disparity between the left image and the right image, and RL to denote the disparity between the right image and the left image. When ABS(LR-RL) > max LRC diff, the point is considered a reliable match point.
-The smaller the set value of "max LRC diff", the more reliable the matching result.
-   
-
-Median Filter
-This is the switch for median filter. The median filter is used to eliminate isolated noise points while preserving the edge information of the image as much as possible. After enabling "enable median filter", adjust the parameter "median filter thresh".
-The larger the set value of "median filter thresh"， the more noise points are filtered out, but it may also cause the loss of detailed information in the depth image.
 
 
 

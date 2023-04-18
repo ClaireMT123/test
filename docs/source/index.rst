@@ -21,3 +21,4 @@ Contents
    usage
    api
    hardware-connection_en
+   viewer_en
