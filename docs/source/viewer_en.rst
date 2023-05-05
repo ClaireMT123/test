@@ -211,11 +211,6 @@ Follow these steps to preview images:
      
      Parameter Interface for Camera 207000106916
 
-
-
-  .. dropdown:: Parameter Description
-      :open:
-      :animate: fade-in-slide-down
           
       **Depth Stream** 
 
