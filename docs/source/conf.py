@@ -18,8 +18,7 @@ extensions = [
     'sphinx.ext.autosectionlabel',
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
-    'sphinx_design',
-    'sphinx_tabs.tabs',
+
 ]
 
 autosectionlabel_prefix_document = True
