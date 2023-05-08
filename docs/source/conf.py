@@ -8,6 +8,7 @@ author = 'PERCIPIO'
 
 release = '0.1'
 version = '0.1.0'
+language = 'en' 
 
 # -- General configuration
 
